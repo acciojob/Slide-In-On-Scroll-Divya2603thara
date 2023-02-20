@@ -57,7 +57,23 @@
         if (callNow) func.apply(context, args);
       };
     }
+function handleSlider(){
+images.forEach((img)=>{
+var scrolledHeight = window.scrollY + window.innerHeight - img.height/2;
+var imageBootemHeight = img.height + img.offSetTop;
 
+var imagehalfscrolled = scrolledHeight > img.offSetTop;
+var imagefullyscrolled = window.scrollY > imageBootemHeight
+
+if(imagehalfscrolled && !imagefullyscrolled){
+  img.classList.add("active")
+}else{
+  img.classList.remove("active");
+}
+
+});
+}
+window.addEventListener('scroll',debounce(handleSlider));
   </script>
 
   <style>
