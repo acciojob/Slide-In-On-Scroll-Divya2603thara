@@ -57,24 +57,25 @@
         if (callNow) func.apply(context, args);
       };
     }
-function handleSlider(){
-	            var images = document.querySelectorAll('.slide-in');
-images.forEach((img)=>{
-var scrolledHeight = window.scrollY + window.innerHeight - img.height/2;
-var imageBootemHeight = img.height + img.offSetTop;
+   function addSlide() {
+            var scrolledImages = document.querySelectorAll('.slide-in');
+            console.log("ScrolledImages",scrolledImages);
+            scrolledImages.forEach((img) => {
+                var scrolledHeight = window.scrollY + window.innerHeight - img.height / 2;
+                var imageBottomHeight = img.offsetTop + img.height;
+                var isImageHalfScrolled = scrolledHeight > img.offsetTop;
 
-var imagehalfscrolled = scrolledHeight > img.offSetTop;
-var imagefullyscrolled = window.scrollY > imageBootemHeight
-
-if(imagehalfscrolled && !imagefullyscrolled){
-  img.classList.add("active")
-}else{
-  img.classList.remove("active");
-}
-
-});
-}
-window.addEventListener('scroll',debounce(handleSlider));
+                var isImageFullyScrolled = window.scrollY > imageBottomHeight;
+               
+                console.log("Height", scrolledHeight,imageBottomHeight, img.offsetTop, window.innerHeight);
+                if (isImageHalfScrolled && !isImageFullyScrolled) {
+                    img.classList.add("active");
+                } else {
+                    img.classList.remove("active");
+                }
+            });
+        }
+        window.addEventListener('scroll', debounce(addSlide));
   </script>
 
   <style>
